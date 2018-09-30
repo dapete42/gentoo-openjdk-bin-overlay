@@ -14,7 +14,7 @@ for keyword in ${KEYWORDS//-\*} ; do
 done
 
 DESCRIPTION="OpenJDK (only extracted to /opt, not properly installed)"
-HOMEPAGE="http://jdk.java.net/${PV_MAJOR}/"
+HOMEPAGE="http://jdk.java.net/"
 LICENSE="GPL-2-with-classpath-exception"
 SLOT="${PV_MAJOR}"
 IUSE="alsa headless-awt source"
@@ -27,7 +27,7 @@ RDEPEND="!headless-awt? (
 		x11-libs/libXext
 		x11-libs/libXi
 		x11-libs/libXrender
-        x11-libs/libXtst
+		x11-libs/libXtst
 	)
 	alsa? ( media-libs/alsa-lib )"
 
