@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE repositories SYSTEM "http://www.gentoo.org/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name>dapete42-openjdk-bin</name>
+    <description lang="en">Overlay for binary OpenJDK packages</description>
+    <homepage>https://github.com/dapete42/gentoo-openjdk-bin-overlay</homepage>
+    <owner type="person">
+      <email>dev@dapete.net</email>
+      <name>Peter Schlömer (dapete42)</name>
+    </owner>
+    <source type="git">https://github.com/dapete42/gentoo-openjdk-bin-overlay.git</source>
+    <source type="git">git+ssh://git@github.com/dapete42/gentoo-openjdk-bin-overlay.git</source>
+   <feed>https://github.com/dapete42/gentoo-openjdk-bin-overlay/commits/master.atom</feed>
+  </repo>
+</repositories>
