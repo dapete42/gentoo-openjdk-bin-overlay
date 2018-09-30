@@ -1,11 +1,9 @@
-EAPI=6
-
-inherit versionator
+EAPI=7
 
 KEYWORDS="-* ~amd64"
 
-PV_MAJOR="$(get_major_version)"
-PV_ALPHA_BUILD="$(get_version_component_range 2)"
+PV_MAJOR="$(ver_cut 1)"
+PV_ALPHA_BUILD="$(ver_cut 3)"
 PV_BUILD="${PV_ALPHA_BUILD/alpha/}"
 
 declare -A ARCH_FILES
@@ -34,14 +32,14 @@ RDEPEND="!headless-awt? (
 	alsa? ( media-libs/alsa-lib )"
 
 src_unpack() {
-	unpack "${A}"
+	unpack ${A}
 	S="${WORKDIR}/jdk-${PV_MAJOR}"
 }
 
 src_install() {
 	local dest="/opt/openjdk-${PV_MAJOR}-ea+${PV_BUILD}"
 	local linkdest="/opt/openjdk-${PV_MAJOR}"
-	local ddest="${ED}${dest#/}"
+	local ddest="${ED%/}/${dest#/}"
 
 	if ! use alsa ; then
 		rm -vf lib/libjsoundalsa.* || die
@@ -75,4 +73,3 @@ src_install() {
 	elog "\t${linkdest}/bin/"
 	elog
 }
-

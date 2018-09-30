@@ -1,13 +1,11 @@
-EAPI=6
-
-inherit versionator
+EAPI=7
 
 KEYWORDS="-* amd64"
 
 # this changes for every version, see download link on HOMEPAGE
 DOWNLOAD_PATH_SECRET="19aef61b38124481863b1413dce1855f/13"
 
-PV_MAJOR="$(get_major_version)"
+PV_MAJOR="$(ver_cut 1)"
 
 declare -A ARCH_FILES
 ARCH_FILES[amd64]="https://download.java.net/java/GA/jdk${PV_MAJOR}/${PV}/${DOWNLOAD_PATH_SECRET}/openjdk-${PV}_linux-x64_bin.tar.gz"
@@ -35,14 +33,14 @@ RDEPEND="!headless-awt? (
 	alsa? ( media-libs/alsa-lib )"
 
 src_unpack() {
-	unpack "${A}"
+	unpack ${A}
 	S="${WORKDIR}/jdk-${PV}"
 }
 
 src_install() {
 	local dest="/opt/openjdk-${PV}"
 	local linkdest="/opt/openjdk-${PV_MAJOR}"
-	local ddest="${ED}${dest#/}"
+	local ddest="${ED%/}/${dest#/}"
 
 	if ! use alsa ; then
 		rm -vf lib/libjsoundalsa.* || die
@@ -76,4 +74,3 @@ src_install() {
 	elog "\t${linkdest}/bin/"
 	elog
 }
-
