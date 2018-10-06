@@ -1,3 +1,9 @@
+# Copyright 1999-2018 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+# Original version based on:
+# dev-java/oracle-jdk-bin/oracle-jdk-bin-9.0.4-r2.ebuild
+
 EAPI=7
 
 KEYWORDS="-* ~amd64"
