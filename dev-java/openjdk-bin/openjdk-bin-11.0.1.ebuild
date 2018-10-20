@@ -9,9 +9,10 @@ EAPI=7
 KEYWORDS="-* amd64"
 
 PV_MAJOR="$(ver_cut 1)"
+PV_BUILD="13"
 
 declare -A ARCH_FILES
-ARCH_FILES[amd64]="https://download.java.net/java/ga/jdk${PV_MAJOR}/openjdk-${PV}_linux-x64_bin.tar.gz"
+ARCH_FILES[amd64]="https://download.java.net/java/GA/jdk${PV_MAJOR}/${PV_BUILD}/GPL/openjdk-11.0.1_linux-x64_bin.tar.gz"
 
 for keyword in ${KEYWORDS//-\*} ; do
 	SRC_URI+=" ${keyword#\~}? ( ${ARCH_FILES[${keyword#\~}]} )"
