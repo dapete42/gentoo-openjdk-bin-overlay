@@ -65,18 +65,18 @@ src_install() {
 	cp -pPR * "${ddest}" || die
 
 	dosym "${dest}/" "${linkdest}"
+}
 
-	elog
+pkg_postinst() {
 	elog "OpenJDK ${PV} has been installed here:"
-	elog "\t${dest}"
+	elog "\t/opt/openjdk-${PV}"
 	elog
 	elog "Additionally, a symlink pointing to this has been created here:"
-	elog "\t${linkdest}"
+	elog "\t/opt/openjdk-${PV_MAJOR}"
 	elog "This symlink will be the same for all OpenJDK ${PV_MAJOR} versions installed"
 	elog "like this."
 	elog
 	elog "Gentoo's Java configuration is not aware of this. If you want to use"
 	elog "OpenJDK ${PV}, use the binaries here:"
-	elog "\t${linkdest}/bin/"
-	elog
+	elog "\t/opt/openjdk-${PV_MAJOR}/bin/"
 }
