@@ -10,10 +10,10 @@ KEYWORDS="-* ~amd64"
 
 PV_MAJOR="$(ver_cut 1)"
 PV_ALPHA_BUILD="$(ver_cut 3)"
-PV_BUILD="${PV_ALPHA_BUILD/alpha/}"
+PV_BUILD="${PV_ALPHA_BUILD/beta/}"
 
 declare -A ARCH_FILES
-ARCH_FILES[amd64]="https://download.java.net/java/early_access/jdk${PV_MAJOR}/${PV_BUILD}/GPL/openjdk-${PV_MAJOR}-ea+${PV_BUILD}_linux-x64_bin.tar.gz"
+ARCH_FILES[amd64]="https://download.java.net/java/GA/jdk${PV_MAJOR}/${PV_BUILD}/GPL/openjdk-${PV_MAJOR}_linux-x64_bin.tar.gz -> openjdk-${PV_MAJOR}_rc+${PV_BUILD}_linux-x64_bin.tar.gz"
 
 for keyword in ${KEYWORDS//-\*} ; do
 	SRC_URI+=" ${keyword#\~}? ( ${ARCH_FILES[${keyword#\~}]} )"
@@ -67,7 +67,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	elog "OpenJDK ${PV_MAJOR} early access build ${PV_BUILD} has been installed here:"
+	elog "OpenJDK ${PV_MAJOR} release candidate build ${PV_BUILD} has been installed here:"
 	elog "\t/opt/openjdk-${PV_MAJOR}-ea+${PV_BUILD}"
 	elog
 	elog "Additionally, a symlink pointing to this has been created here:"
