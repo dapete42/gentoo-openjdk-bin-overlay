@@ -43,7 +43,7 @@ src_unpack() {
 }
 
 src_install() {
-	local dest="/opt/openjdk-${PV_MAJOR}-ea+${PV_BUILD}"
+	local dest="/opt/openjdk-${PV_MAJOR}-rc+${PV_BUILD}"
 	local linkdest="/opt/openjdk-${PV_MAJOR}"
 	local ddest="${ED%/}/${dest#/}"
 
@@ -68,7 +68,7 @@ src_install() {
 
 pkg_postinst() {
 	elog "OpenJDK ${PV_MAJOR} release candidate build ${PV_BUILD} has been installed here:"
-	elog "\t/opt/openjdk-${PV_MAJOR}-ea+${PV_BUILD}"
+	elog "\t/opt/openjdk-${PV_MAJOR}-rc+${PV_BUILD}"
 	elog
 	elog "Additionally, a symlink pointing to this has been created here:"
 	elog "\t/opt/openjdk-${PV_MAJOR}"
@@ -76,6 +76,6 @@ pkg_postinst() {
 	elog "like this."
 	elog
 	elog "Gentoo's Java configuration is not aware of this. If you want to use"
-	elog "OpenJDK ${PV_MAJOR} preview ${PV_BUILD}, use the binaries here:"
+	elog "OpenJDK ${PV_MAJOR} release candidate ${PV_BUILD}, use the binaries here:"
 	elog "\t/opt/openjdk-${PV_MAJOR}/bin/"
 }
