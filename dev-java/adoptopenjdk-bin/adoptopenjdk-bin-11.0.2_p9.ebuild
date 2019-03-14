@@ -19,8 +19,8 @@ for keyword in ${KEYWORDS//-\*} ; do
 	SRC_URI+=" ${keyword#\~}? ( ${ARCH_FILES[${keyword#\~}]} )"
 done
 
-DESCRIPTION="OpenJDK (only extracted to /opt, not properly installed)"
-HOMEPAGE="http://jdk.java.net/"
+DESCRIPTION="AdoptOpenJDK (only extracted to /opt, not properly installed)"
+HOMEPAGE="https://adoptopenjdk.net/"
 LICENSE="GPL-2-with-classpath-exception"
 SLOT="${PV_MAJOR}"
 IUSE="alsa headless-awt source"
