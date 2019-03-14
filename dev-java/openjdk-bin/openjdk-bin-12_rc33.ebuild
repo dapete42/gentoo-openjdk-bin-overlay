@@ -9,8 +9,7 @@ EAPI=7
 KEYWORDS="-* ~amd64"
 
 PV_MAJOR="$(ver_cut 1)"
-PV_ALPHA_BUILD="$(ver_cut 3)"
-PV_BUILD="${PV_ALPHA_BUILD/beta/}"
+PV_BUILD="$(ver_cut 3)"
 
 declare -A ARCH_FILES
 ARCH_FILES[amd64]="https://download.java.net/java/GA/jdk${PV_MAJOR}/${PV_BUILD}/GPL/openjdk-${PV_MAJOR}_linux-x64_bin.tar.gz -> openjdk-${PV_MAJOR}_rc+${PV_BUILD}_linux-x64_bin.tar.gz"
