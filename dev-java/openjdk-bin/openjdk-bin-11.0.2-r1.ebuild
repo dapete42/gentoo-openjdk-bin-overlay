@@ -6,13 +6,13 @@
 
 EAPI=7
 
-KEYWORDS="-* ~amd64"
+KEYWORDS="-* amd64"
 
 PV_MAJOR="$(ver_cut 1)"
-PV_BUILD="$(ver_cut 3)"
+PV_BUILD="9"
 
 declare -A ARCH_FILES
-ARCH_FILES[amd64]="https://download.java.net/java/GA/jdk${PV_MAJOR}/${PV_BUILD}/GPL/openjdk-${PV_MAJOR}_linux-x64_bin.tar.gz -> openjdk-${PV_MAJOR}_rc+${PV_BUILD}_linux-x64_bin.tar.gz"
+ARCH_FILES[amd64]="https://download.java.net/java/GA/jdk${PV_MAJOR}/${PV_BUILD}/GPL/openjdk-${PV}_linux-x64_bin.tar.gz"
 
 for keyword in ${KEYWORDS//-\*} ; do
 	SRC_URI+=" ${keyword#\~}? ( ${ARCH_FILES[${keyword#\~}]} )"
@@ -38,12 +38,12 @@ RDEPEND="!headless-awt? (
 
 src_unpack() {
 	unpack ${A}
-	S="${WORKDIR}/jdk-${PV_MAJOR}"
+	S="${WORKDIR}/jdk-${PV}"
 }
 
 src_install() {
-	local dest="/opt/openjdk-${PV_MAJOR}-rc+${PV_BUILD}"
-	local linkdest="/opt/openjdk-${PV_MAJOR}"
+	local dest="/opt/openjdk-${PV}"
+	local linkdest="/opt/openjdk-${PV_MAJOR}-latest"
 	local ddest="${ED%/}/${dest#/}"
 
 	if ! use alsa ; then
@@ -66,15 +66,15 @@ src_install() {
 }
 
 pkg_postinst() {
-	elog "OpenJDK ${PV_MAJOR} release candidate build ${PV_BUILD} has been installed here:"
-	elog "\t/opt/openjdk-${PV_MAJOR}-rc+${PV_BUILD}"
+	elog "OpenJDK ${PV} has been installed here:"
+	elog "\t/opt/openjdk-${PV}"
 	elog
 	elog "Additionally, a symlink pointing to this has been created here:"
-	elog "\t/opt/openjdk-${PV_MAJOR}"
+	elog "\t/opt/openjdk-${PV_MAJOR}-latest"
 	elog "This symlink will be the same for all OpenJDK ${PV_MAJOR} versions installed"
 	elog "like this."
 	elog
 	elog "Gentoo's Java configuration is not aware of this. If you want to use"
-	elog "OpenJDK ${PV_MAJOR} release candidate ${PV_BUILD}, use the binaries here:"
-	elog "\t/opt/openjdk-${PV_MAJOR}/bin/"
+	elog "OpenJDK ${PV}, use the binaries here:"
+	elog "\t/opt/openjdk-${PV_MAJOR}-latest/bin/"
 }

@@ -12,7 +12,7 @@ PV_MAJOR="$(ver_cut 1)"
 PV_BUILD="9"
 
 declare -A ARCH_FILES
-ARCH_FILES[amd64]="https://download.java.net/java/GA/jdk${PV_MAJOR}/${PV_BUILD}/GPL/openjdk-${PV}_linux-x64_bin.tar.gz"
+ARCH_FILES[amd64]="https://download.java.net/java/GA/jdk${PV_MAJOR}/GPL/openjdk-${PV}_linux-x64_bin.tar.gz"
 
 for keyword in ${KEYWORDS//-\*} ; do
 	SRC_URI+=" ${keyword#\~}? ( ${ARCH_FILES[${keyword#\~}]} )"
@@ -43,7 +43,7 @@ src_unpack() {
 
 src_install() {
 	local dest="/opt/openjdk-${PV}"
-	local linkdest="/opt/openjdk-${PV_MAJOR}"
+	local linkdest="/opt/openjdk-${PV_MAJOR}-latest"
 	local ddest="${ED%/}/${dest#/}"
 
 	if ! use alsa ; then
@@ -62,23 +62,19 @@ src_install() {
 	dodir "${dest}"
 	cp -pPR * "${ddest}" || die
 
-	if [ "${dest}" != "${linkdest}" ] ; then
-		dosym "${dest}/" "${linkdest}"
-	fi
+	dosym "${dest}/" "${linkdest}"
 }
 
 pkg_postinst() {
 	elog "OpenJDK ${PV} has been installed here:"
 	elog "\t/opt/openjdk-${PV}"
 	elog
-	if [ "${PV}" != "${PV_MAJOR}" ] ; then
-		elog "Additionally, a symlink pointing to this has been created here:"
-		elog "\t/opt/openjdk-${PV_MAJOR}"
-		elog "This symlink will be the same for all OpenJDK ${PV_MAJOR} versions installed"
-		elog "like this."
-		elog
-	fi
+	elog "Additionally, a symlink pointing to this has been created here:"
+	elog "\t/opt/openjdk-${PV_MAJOR}-latest"
+	elog "This symlink will be the same for all OpenJDK ${PV_MAJOR} versions installed"
+	elog "like this."
+	elog
 	elog "Gentoo's Java configuration is not aware of this. If you want to use"
 	elog "OpenJDK ${PV}, use the binaries here:"
-	elog "\t/opt/openjdk-${PV_MAJOR}/bin/"
+	elog "\t/opt/openjdk-${PV_MAJOR}-latest/bin/"
 }

@@ -44,7 +44,7 @@ src_unpack() {
 
 src_install() {
 	local dest="/opt/adoptopenjdk-${PV_FULL}+${PV_BUILD}"
-	local linkdest="/opt/adoptopenjdk-${PV_MAJOR}"
+	local linkdest="/opt/adoptopenjdk-${PV_MAJOR}-latest"
 	local ddest="${ED%/}/${dest#/}"
 
 	if ! use alsa ; then
@@ -63,23 +63,19 @@ src_install() {
 	dodir "${dest}"
 	cp -pPR * "${ddest}" || die
 
-	if [ "${dest}" != "${linkdest}" ] ; then
-		dosym "${dest}/" "${linkdest}"
-	fi
+	dosym "${dest}/" "${linkdest}"
 }
 
 pkg_postinst() {
 	elog "AdoptOpenJDK ${PV_FULL}+${PV_BUILD} has been installed here:"
 	elog "\t/opt/adoptopenjdk-${PV_FULL}+${PV_BUILD}"
 	elog
-	if [ "${PV}" != "${PV_MAJOR}" ] ; then
-		elog "Additionally, a symlink pointing to this has been created here:"
-		elog "\t/opt/adoptopenjdk-${PV_MAJOR}"
-		elog "This symlink will be the same for all AdoptOpenJDK ${PV_MAJOR} versions"
-		elog "installed like this."
-		elog
-	fi
+	elog "Additionally, a symlink pointing to this has been created here:"
+	elog "\t/opt/adoptopenjdk-${PV_MAJOR}-latest"
+	elog "This symlink will be the same for all AdoptOpenJDK ${PV_MAJOR} versions"
+	elog "installed like this."
+	elog
 	elog "Gentoo's Java configuration is not aware of this. If you want to use"
 	elog "AdoptOpenJDK ${PV_FULL}+${PV_BUILD}, use the binaries here:"
-	elog "\t/opt/adoptopenjdk-${PV_MAJOR}/bin/"
+	elog "\t/opt/adoptopenjdk-${PV_MAJOR}-latest/bin/"
 }

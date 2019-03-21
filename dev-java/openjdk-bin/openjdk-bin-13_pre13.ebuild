@@ -12,7 +12,7 @@ PV_MAJOR="$(ver_cut 1)"
 PV_BUILD="$(ver_cut 3)"
 
 declare -A ARCH_FILES
-ARCH_FILES[amd64]="https://download.java.net/java/early_access/jdk${PV_MAJOR}/11/GPL/openjdk-${PV_MAJOR}-ea+${PV_BUILD}_linux-x64_bin.tar.gz"
+ARCH_FILES[amd64]="https://download.java.net/java/early_access/jdk${PV_MAJOR}/${PV_BUILD}/GPL/openjdk-${PV_MAJOR}-ea+${PV_BUILD}_linux-x64_bin.tar.gz"
 
 for keyword in ${KEYWORDS//-\*} ; do
 	SRC_URI+=" ${keyword#\~}? ( ${ARCH_FILES[${keyword#\~}]} )"
@@ -43,7 +43,7 @@ src_unpack() {
 
 src_install() {
 	local dest="/opt/openjdk-${PV_MAJOR}-ea+${PV_BUILD}"
-	local linkdest="/opt/openjdk-${PV_MAJOR}"
+	local linkdest="/opt/openjdk-${PV_MAJOR}-latest"
 	local ddest="${ED%/}/${dest#/}"
 
 	if ! use alsa ; then
