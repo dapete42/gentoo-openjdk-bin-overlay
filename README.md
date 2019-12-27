@@ -1,6 +1,8 @@
 # openjdk-bin overlay
 
-This is an overlay for Gentoo which includes binary packages for OpenJDK 10+. These packages do not integrate with Gentoo's java support; they just extract official OpenJDK builds to */opt/*. They are meant as a stopgap to automatically install a current JDK or JRE until Gentoo officially supports anything beyond Java 8.
+This is an overlay for Gentoo which includes binary packages for OpenJDK 10+ that are not long term support versions.
+
+Gentoo's official Portage tree contains ebuilds for the long term support versions (currently OpenJDK 11). The ebuilds in this overlay are based on these. Just as the official ebuilds, these do not integrate with Gentoo's java support; they just extract official OpenJDK builds to */opt/*.
 
 ## Setting up the overlay using Layman
 
@@ -12,8 +14,6 @@ This overlay is most easily integrated into Portage using [Layman](https://wiki.
 
 ## Installation
 
-`emerge openjdk-bin` will install the latest stable version. The ebuilds are slotted; so using e.g. `emerge openjdk-bin:11` it is possible to always get the newest version of OpenJDK 11.
+`emerge openjdk-bin` will install the latest stable version. The ebuilds are slotted; so using e.g. `emerge openjdk-bin:13` it is possible to always get the newest version of OpenJDK 13.
 
-The JDK is extracted to */opt/*. The exact name depends on the version installed; if necessary a symlink will be created so that, going back to the example, */opt/openjdk-11* will now always point to an installation of the OpenJDK.
-
-The builds are the official Oracle builds of OpenJDK. The `USE` flags supported are *alsa*, *headless-awt* and *source*. These function in the same way as on official Gentoo Java ebuilds.
+The JDK is extracted to */opt/*. The exact name depends on the version installed.
