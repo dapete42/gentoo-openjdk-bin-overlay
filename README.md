@@ -1,3 +1,5 @@
+**This is deprecated, current OpenJDK versions are available in Gentoo by default.**
+
 # openjdk-bin overlay
 
 This is an overlay for Gentoo which includes binary packages for OpenJDK 10+ that are not long term support versions.
